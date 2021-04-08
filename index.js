@@ -127,4 +127,4 @@ app.get("/robots.txt", (req, res) => {
 res.send("*");
 });
 
-app.listen(3000, () => console.log("server started at port 3000"));
+app.listen(process.env.PORT, () => console.log("server started at port 3000"));
