@@ -1,5 +1,12 @@
 (function ($) {
+  /**
+   * Initializes custom functionality when the document is ready.
+   */
   $(document).ready(() => {
+    /**
+     * Toggles the hamburger menu and navigation visibility.
+     * @param {Event} e - The click event object.
+     */
     function hamburger(e) {
       e.preventDefault();
       $(".hamburger i").toggleClass("fa-times", 1000);
@@ -11,6 +18,9 @@
       }
     }
 
+    /**
+     * Initializes the Owl Carousel for recent posts.
+     */
     $(".recent-posts").owlCarousel({
       loop: true,
       autoplay: true,
@@ -38,6 +48,10 @@
       }
     });
 
+    /**
+     * Handles smooth scrolling when clicking on menu items.
+     * @param {Event} e - The click event object.
+     */
     $(".menu ul li a").click(function (e) {
       window.scrollTo({
         top:
@@ -46,6 +60,9 @@
       });
     });
 
+    /**
+     * Updates active state of navigation links on scroll.
+     */
     $(window).scroll(function () {
       var scrollLink = $(".scroll");
       var scrollbarLocation = $(this).scrollTop();
@@ -62,6 +79,9 @@
       });
     });
 
+    /**
+     * Updates navbar style and back-to-top visibility on scroll.
+     */
     document.addEventListener("scroll", () => {
       let x = window.scrollY;
       if (x >= 5) {
@@ -84,6 +104,14 @@
 
   /* Charts JS */
   let myCal = (12.6 - 5) / 5;
+  /**
+   * Calculates chart data points.
+   * @param {number} first - The starting value.
+   * @param {number} last - The ending value.
+   * @param {number} years - The number of years/steps.
+   * @param {number} step - The current step index.
+   * @returns {number} The calculated data point.
+   */
   function getCalData(first, last, years, step) {
     return first + ((last - first) / years) * step;
   }
@@ -154,6 +182,9 @@
     ],
   };
 
+  /**
+   * Initializes charts when the window loads.
+   */
   window.onload = function () {
     var lctx = document.getElementById("leftCanvas").getContext("2d");
     var rctx = document.getElementById("rightCanvas").getContext("2d");
@@ -223,6 +254,9 @@
     });
   };
 
+  /**
+   * Randomizes chart data (Note: `lineChartData` and `randomScalingFactor` are not defined in this scope).
+   */
   $("#randomizeData").click(function () {
     lineChartData.datasets.forEach(function (dataset) {
       dataset.data = dataset.data.map(function () {

@@ -43,10 +43,20 @@ window.chartColors = {
 
   Samples.utils = {
     // Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
+    /**
+     * Seeds the random number generator.
+     * @param {number} seed - The seed value.
+     */
     srand: function (seed) {
       this._seed = seed;
     },
 
+    /**
+     * Generates a pseudo-random number between min and max.
+     * @param {number} [min=0] - The minimum value.
+     * @param {number} [max=1] - The maximum value.
+     * @returns {number} The random number.
+     */
     rand: function (min, max) {
       var seed = this._seed;
       min = min === undefined ? 0 : min;
@@ -55,6 +65,17 @@ window.chartColors = {
       return min + (this._seed / 233280) * (max - min);
     },
 
+    /**
+     * Generates an array of random numbers based on configuration.
+     * @param {Object} config - Configuration object.
+     * @param {number} [config.min=0] - Minimum value.
+     * @param {number} [config.max=1] - Maximum value.
+     * @param {Array<number>} [config.from=[]] - Array of base values.
+     * @param {number} [config.count=8] - Number of values to generate.
+     * @param {number} [config.decimals=8] - Number of decimals.
+     * @param {number} [config.continuity=1] - Probability of continuity.
+     * @returns {Array<number|null>} Array of generated numbers.
+     */
     numbers: function (config) {
       var cfg = config || {};
       var min = cfg.min || 0;
@@ -79,6 +100,16 @@ window.chartColors = {
       return data;
     },
 
+    /**
+     * Generates an array of labels based on configuration.
+     * @param {Object} config - Configuration object.
+     * @param {number} [config.min=0] - Minimum value.
+     * @param {number} [config.max=100] - Maximum value.
+     * @param {number} [config.count=8] - Number of labels to generate.
+     * @param {number} [config.decimals=8] - Number of decimals.
+     * @param {string} [config.prefix=""] - Prefix for each label.
+     * @returns {Array<string>} Array of generated labels.
+     */
     labels: function (config) {
       var cfg = config || {};
       var min = cfg.min || 0;
@@ -98,6 +129,13 @@ window.chartColors = {
       return values;
     },
 
+    /**
+     * Generates an array of month names.
+     * @param {Object} config - Configuration object.
+     * @param {number} [config.count=12] - Number of months to generate.
+     * @param {number} [config.section] - Number of characters to include from month name.
+     * @returns {Array<string>} Array of month names.
+     */
     months: function (config) {
       var cfg = config || {};
       var count = cfg.count || 12;
@@ -113,10 +151,21 @@ window.chartColors = {
       return values;
     },
 
+    /**
+     * Returns a color from the predefined palette based on index.
+     * @param {number} index - Index of the color.
+     * @returns {string} The color string.
+     */
     color: function (index) {
       return COLORS[index % COLORS.length];
     },
 
+    /**
+     * Returns a transparent version of a color.
+     * @param {string} color - The base color.
+     * @param {number} [opacity=0.5] - The opacity value.
+     * @returns {string} The rgba color string.
+     */
     transparentize: function (color, opacity) {
       var alpha = opacity === undefined ? 0.5 : 1 - opacity;
       return Color(color).alpha(alpha).rgbString();
@@ -124,6 +173,11 @@ window.chartColors = {
   };
 
   // DEPRECATED
+  /**
+   * Generates a random scaling factor (DEPRECATED).
+   * @deprecated
+   * @returns {number} A random integer between -100 and 100.
+   */
   window.randomScalingFactor = function () {
     return Math.round(Samples.utils.rand(-100, 100));
   };
